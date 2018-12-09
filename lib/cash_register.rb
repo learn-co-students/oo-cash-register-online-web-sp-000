@@ -1,6 +1,10 @@
+require 'pry'
+
+
+
 
 class CashRegister
-  attr_accessor :total, :discount, :items
+  attr_accessor :total, :discount, :items, :transactions, :count
   
 
   
@@ -8,13 +12,28 @@ class CashRegister
     @total = 0
     @discount = discount
     @items = []
+    @transactions = {}
+    @count = 0 
   end
   
   
   def add_item(title,price,quantity=1)
+    
     previous_total = @total
     self.total += price*quantity
-    @items << title
+    if quantity == 1 
+      @items << title
+    else
+      quantity.times do
+      @items << title
+      end
+    end
+  
+    @transactions[@count +1] = {title: title, price: price, quantity: quantity, total: price*quantity}
+    
+    @count += 1 
+    
+  
   end
   
   def apply_discount
@@ -35,12 +54,20 @@ class CashRegister
   end
   
   def items
-    
-    @@items
-    
+    @items
   end 
   
+  def void_last_transaction
+    
+   last = @transactions[@count][:total]
+   
+   new_total = @total - last
+   
+   @total = new_total
+   
+
+  end
   
-  
+
   
 end
