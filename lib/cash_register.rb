@@ -1,5 +1,3 @@
-
-
 class CashRegister
   attr_accessor :discount, :items, :total,:last_transaction
   def initialize(discount=0)
@@ -15,7 +13,7 @@ class CashRegister
     end
     self.last_transaction = price * quantity
   end
-  
+
   def apply_discount
     if (discount.to_i)!= 0
       self.total = (total * (100-discount.to_f)/100).to_i
