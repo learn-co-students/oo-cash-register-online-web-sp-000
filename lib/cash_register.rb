@@ -1,21 +1,21 @@
 class CashRegister
-  attr_accessor :total, :discount, :track_last
+  attr_accessor :total, :discount, :track_last, :itemized
   
-  @@itemized = []
+  
   @track_last = 0
   
   def initialize(discount = 0)
     @total = total
     self.total = 0
     @discount = discount
-    
+    @itemized = []
     
   end 
   
   def add_item(title, price, quantity = 1)
     self.total = total + price*quantity
     
-      @@itemized.fill(title, @@itemized.size, quantity)
+      @itemized.fill(title, @itemized.size, quantity)
       @track_last = price*quantity
      
   end 
@@ -32,7 +32,7 @@ class CashRegister
    end 
    
   def items 
-    return @@itemized
+    return @itemized
      
   end 
   
