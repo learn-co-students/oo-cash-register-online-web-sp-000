@@ -14,10 +14,6 @@ class CashRegister
 
   end
 
-  def discount
-    @discount
-  end
-
   def add_item(title, price, quantity=nil)
 
     if quantity
@@ -41,12 +37,8 @@ class CashRegister
     end
   end
 
-  def items
-    @items
-  end
-
   def void_last_transaction
-    @total -= self.last_item 
+    @total -= self.last_item
   end
 
 end
