@@ -1,30 +1,24 @@
 require "pry"
 class CashRegister
-  attr_accessor :total, :discount, :price
+  attr_accessor :total, :discount, :items, :last_transaction
 
-  def initialize(*ee_discount)
-    @@items = []
-    @@prices = []
+  def initialize(ee_discount=0)
+    @items = []
 
     @total = 0
-    @discount = ee_discount.join("").to_f
+    @discount = ee_discount
 
     @total
   end
 
-  def add_item(title, price, *quantity)
-     quantity[0] ? @total += price * quantity.join("").to_f : @total += price
+  def add_item(title, price, quantity=1)
+     @total += price * quantity
      @price = price
 
-     if quantity[0]
-       quantity[0].times do
-         @@items << title
-         @@prices << price
+     quantity.times do
+         @items << title
        end
-     else
-       @@items << title
-       @@prices << price
-     end
+    @last_transaction = price * quantity
   end
 
   def apply_discount
@@ -38,10 +32,10 @@ class CashRegister
   end
 
   def items
-    @@items
+    @items
   end
 
   def void_last_transaction
-    @total = @total - @@prices.last.to_f
+    @total -= @last_transaction
   end
 end
