@@ -23,9 +23,16 @@ class CashRegister
     if discount > 0
       @amount_off = (@price * discount)/100
       @total -= @amount_off
-      "With the discount your total comes to #{@total}."
+      "After the discount, the total comes to $#{@total}."
     else
-      "There is no discount"
+      "There is no discount to apply."
     end
+  end
+
+  def items
+    @items
+  end
+  def void_last_transaction
+    @total -= @price
   end
 end
