@@ -1,10 +1,10 @@
 require "pry"
 
 class CashRegister
-  attr_accessor :total, :title, :quantity, :price, :transaction, :transactions, :discount
+  attr_accessor :total, :title, :quantity, :price, :transaction, :transactions, :last_transaction, :discount
   
-  def initialize(total=0, discount=20)  
-    @total = total
+  def initialize(discount=0)  
+    @total = 0
     @discount = discount
     @transactions =[]
   end  
@@ -16,56 +16,43 @@ class CashRegister
         transactions << title
       end
     self.transaction = price * quantity
+    @last_transaction_amount = @total
+    @total
   end
-  
   
   def apply_discount
-
-    
-    self.transaction *= 0.8
+    if @discount == 0
+      "There is no discount to apply."
+    else
+      trans = self.total * @discount
+      trans2 = trans / 100
+      self.total -= trans2
+      "After the discount, the total comes to $#{self.total}."
+    end
   end
-  
-  
-  
-  
   
   def items
     @transactions
   end
   
   def void_last_transaction
-    
+    @total -= @last_transaction_amount
   end
 end    
     
     
 =begin
  
- describe '#apply_discount' do
-    context 'the cash register was initialized with an employee discount' do
-      it 'applies the discount to the total price' do
-        cash_register_with_discount.add_item("macbook air", 1000)
-        cash_register_with_discount.apply_discount
-        expect(cash_register_with_discount.total).to eq(800)
-      end
+  def add_item(item, price, quantity = 1)
+    item_info = {}
+    item_info[:name] = item
+    item_info[:price] = price
+    item_info[:quantity] = quantity
 
-      it 'returns success message with updated total' do
-        cash_register_with_discount.add_item("macbook air", 1000)
-        expect(cash_register_with_discount.apply_discount).to eq("After the discount, the total comes to $800.")
-      end
+    @cart << item_info
 
-      it 'reduces the total' do
-        cash_register.total = 0
-        cash_register_with_discount.add_item("macbook air", 1000)
-        expect{cash_register_with_discount.apply_discount}.to change{cash_register_with_discount.total}.by(-200)
-      end
-    end
+    @total += price * quantity
 
-    context 'the cash register was not initialized with an employee discount' do
-      it 'returns a string error message that there is no discount to apply' do
-        expect(cash_register.apply_discount).to eq("There is no discount to apply.")
-      end
-    end
   end
   
 =end
