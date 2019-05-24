@@ -20,7 +20,7 @@ class CashRegister
   end
 
   def void_last_transaction
-    voided = last_transaction[1] #index 1 of last transaction is the price of the item
-   @total -= voided
+    #index 1 of last transaction is the price of the item
+   @total -= last_transaction[1]
   end
 end
