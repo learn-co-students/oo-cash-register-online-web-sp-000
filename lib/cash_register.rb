@@ -2,6 +2,8 @@ class CashRegister
   
   attr_accessor :total, :discount, :item, :price, :quantity
   
+  @@items = []
+  
   def initialize(discount = 0)
     @total = 0
     @discount = discount
@@ -27,11 +29,8 @@ class CashRegister
   end
   
   def items
-    #need to access items being passed in add_item method
-    items = []
-    self.add_item(@item, @price)
-    items << @item 
+    self.add_item(@item, @price, @quantity)
     
-    items
+    @@items << @item
   end  
 end  
