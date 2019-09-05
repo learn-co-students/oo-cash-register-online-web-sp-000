@@ -1,16 +1,24 @@
 class CashRegister
-  attr_accessor :total, :discount
+  attr_accessor :total
   
-  def initialize(total = 0, *employee_discount = 20)
-    @total = total
-    @employee_discount = employee_discount
+  def initialize(employee_discount = 0)
+    @total = 0
+    @employee_discount = employee_discount.to_i
     @item_names = []
     @items = {}
   end
   
+  def discount
+    @employee_discount
+  end
+  
   def add_item(item, price, quantity = 1)
     @item = item
-    @item_names << @item
+    i=0
+    while i < quantity
+      @item_names << @item
+      i+=1
+    end
     @price = price
     @quantity = quantity
     @items[@item] = [@price, @quantity]
@@ -18,23 +26,22 @@ class CashRegister
   end
   
   def apply_discount
-    if @employee_discount == true
-      new_total = @total*0.80
-      puts "After the discount, the total comes to #{new_total}"
-      @total = new_total
+    if @employee_discount != 0
+      @total = @total*0.01*(100-@employee_discount)
+      @total = @total.to_i
+      "After the discount, the total comes to $#{@total}."
     else
-      puts "There is no discount to apply."
+      "There is no discount to apply."
     end
   end
   
   def items
-    @items
+    @item_names
   end
   
   def void_last_transaction
     item_count = @items.count
     @total -= @items[@item][0]*@items[@item][1]
-    @item_names.pop
     @items.delete(@item)
     if item_count == 0
       @total = 0
