@@ -7,6 +7,7 @@ class CashRegister
     @total = 0 
     @discount = discount
     @items = []
+    @new_item
   end
   
   def total
@@ -14,7 +15,7 @@ class CashRegister
   end
   
   def add_item(title, price, quantity = 1)
-    new_item = @total += price * quantity
+    @new_item = @total += price * quantity
     if quantity > 1
       amounts = title * quantity
       @items << amounts.split(", ")
@@ -34,6 +35,10 @@ end
 
  def items
     @items
+  end
+  
+  def void_last_transaction
+    self.total = @total - @new_item
   end
 
 end
