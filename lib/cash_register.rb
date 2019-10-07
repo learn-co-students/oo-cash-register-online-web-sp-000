@@ -6,6 +6,7 @@ class CashRegister
   def initialize(total = 0, discount = 20)
     @total = total
     @discount = discount
+    @items = []
   end
   
   def total
@@ -13,12 +14,13 @@ class CashRegister
   end
   
   def add_item(title, price, quantity = 1)
-    @total += price * quantity
+    new_item = @total += price * quantity
+    @items << title * quantity
   end
   
   def apply_discount
     if discount > 0
-    self.total = self.total - (self.total * (discount.to_f/100.0)).to_i
+    self.total = total - (total * (discount.to_f/100.0)).to_i
       "After the discount, the total comes to $#{self.total}."
     else   
       "There is no discount to apply."
@@ -27,8 +29,8 @@ class CashRegister
    #why are we getting 816 (due to floats?)
   end
 
-  def items
-    @@items
+ def items
+    @items
   end
 
 end
