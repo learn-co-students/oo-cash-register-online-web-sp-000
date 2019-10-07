@@ -1,7 +1,7 @@
 require 'pry'
 class CashRegister
   
-  attr_accessor :title, :price, :discount, :total
+  attr_accessor :title, :price, :discount, :total, :items
   
   def initialize(total = 0, discount = 20)
     @total = total
@@ -17,12 +17,18 @@ class CashRegister
   end
   
   def apply_discount
-    if @discount == 20
-      new_total = @total - (@total * 0.20)
-      binding.pry
-       "After the discount, the total comes to $#{new_total}."
-    else 
+    if discount > 0
+    self.total = self.total - (self.total * (discount.to_f/100.0)).to_i
+      "After the discount, the total comes to $#{self.total}."
+    else   
       "There is no discount to apply."
+    end
+   #why self.total rather than @total???
+   #why are we getting 816 (due to floats?)
   end
-end
+
+  def items
+    @@items
+  end
+
 end
