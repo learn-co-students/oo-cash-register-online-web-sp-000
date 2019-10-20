@@ -19,4 +19,11 @@ class CashRegister
     @total -= reduce.to_i
     "After the discount, the total comes to $#{@total}."
   end
+  
+  def items
+    item_arr = []
+    @pending_purchases.each do |product|
+      item_arr << [product[0]] * product[2]
+    end
+  end
 end
