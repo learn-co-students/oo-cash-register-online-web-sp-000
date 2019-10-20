@@ -14,9 +14,9 @@ class CashRegister
   end
   
   def apply_discount()
+    return "There is no discount to apply." if @discount == 0
     reduce = Float(@total) * Float(@discount)/100.0
-    @total -= reduce
-    @total = @total.to_i
+    @total -= reduce.to_i
     "After the discount, the total comes to $#{@total}."
   end
 end
