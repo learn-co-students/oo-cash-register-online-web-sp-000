@@ -23,7 +23,11 @@ class CashRegister
   def items
     @pending_purchases.collect do |product| 
       [product[0]] * product[2]
-    end
-    # item_arr.flatten
+    end.flatten
+  end
+  
+  def void_last_transaction
+    product = @pending_purchases.pop
+    @total -= product[1] * product[2]
   end
 end
