@@ -21,11 +21,9 @@ class CashRegister
   end
   
   def items
-    item_arr = []
-    @pending_purchases.each do |product|
-      arr = [product[0]] * product[2]
-      item_arr << arr.flatten
+    @pending_purchases.collect do |product| 
+      [product[0]] * product[2]
     end
-    item_arr.flatten
+    # item_arr.flatten
   end
 end
