@@ -27,7 +27,7 @@ class CashRegister
   end
   
   def void_last_transaction
-    product = @pending_purchases.pop
-    @total -= product[1] * product[2]
+    voided_product = @pending_purchases.pop
+    @total -= voided_product[1] * voided_product[2]
   end
 end
