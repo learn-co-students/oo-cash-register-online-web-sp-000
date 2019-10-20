@@ -12,4 +12,9 @@ class CashRegister
     @total += price * quantity
     @pending_purchases <<  [title, price, quantity]
   end
+  
+  def apply_discount()
+    reduce = Float(@total) * Float(@discount)
+    @total -= reduce
+    
 end
