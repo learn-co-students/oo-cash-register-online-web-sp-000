@@ -23,7 +23,9 @@ class CashRegister
   def items
     item_arr = []
     @pending_purchases.each do |product|
-      item_arr << [product[0]] * product[2]
+      arr = [product[0]] * product[2]
+      item_arr << arr.flatten
     end
+    item_arr.flatten
   end
 end
