@@ -14,7 +14,7 @@ class CashRegister
   end
   
   def apply_discount()
-    reduce = Float(@total) * Float(@discount)
+    reduce = Float(@total) * Float(@discount)/100.0
     @total -= reduce
   end
 end
