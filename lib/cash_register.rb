@@ -1,18 +1,15 @@
 require "pry"
 
 class CashRegister
-  attr_accessor :total, :discount, :add_item, :quantity, :new_total
+  attr_accessor :total, :add_item, :quantity, :new_total
 
-  def initialize(total = 0, options = {})
-    @total = total
+  def initialize(discount = 0)
+    @total = 0
+    @discount = discount
   #  options[:discount] ||=   @total.to_i - (@total.to_i * 0.2)
 
   end
 
-  def discount
-    @total - (@total * 0.2)
-    @total.to_i
-  end
 
   def add_item(title, price, quantity = 1)
 #binding.pry
@@ -23,11 +20,13 @@ class CashRegister
 
   def apply_discount
   # binding.pry
-if  @discount == nil
+if  @discount == 0
   puts "There is no discount to apply."
 
 
-  else
+else
+binding.pry
+    @total + @discount
       puts "After the discount, the total comes to #{@discount}"
     end
   end
