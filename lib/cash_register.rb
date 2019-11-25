@@ -1,11 +1,13 @@
 require "pry"
 
 class CashRegister
-  attr_accessor :total, :discount,, :item, :add_item, :quantity, :title, :price, :new_total
+  attr_accessor :total, :last_price, :discount, :quantity, :title, :price
 
   def initialize(discount = 0 )
     @total = 0
     @discount = discount
+    @items = []
+    @last_price = []
   end
 
 
@@ -13,7 +15,11 @@ class CashRegister
 #binding.pry
 #unless @title = nil
     @total = @total + (price * quantity)
-    @title = title
+  #  @title = title
+  quantity.times do
+    @items << title
+    @last_price <<  price * quantity
+  end
 
   end
 
@@ -28,24 +34,29 @@ class CashRegister
       end
     end
 
-
   def items
- item = []
-#binding.pry
-unless @title == nil
-@item << @title
+    @items
   end
-end
 
   def void_last_transaction
-if @price == nil
-    @total = 0.0
-#binding.pry
-else
-  self - (@price * @quantity)
-end
+ binding.pry
+ @total - @last_price
+
+ end
+  #  @last_price.pop
+#  until @last_price.count == 1
+#     @last_price.shift
+#     @last_price.join("").to_i
+#     @total - @last_price
+#if @last_price.count == 0
+#  @total = 0.0
+#    end
+#    end
+#  end
 
 
 end
-#  @total  = 0.0
-end
+ # You'll need to make an
+#additional attribute accessor and keep track of that last
+#transaction amount somehow. In what method of
+ #the class are you working with an individual item?
