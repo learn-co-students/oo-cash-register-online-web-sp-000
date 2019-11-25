@@ -18,7 +18,7 @@ class CashRegister
   #  @title = title
   quantity.times do
     @items << title
-    @last_price <<  price * quantity
+    @last_price =  (price * quantity)
   end
 
   end
@@ -39,10 +39,15 @@ class CashRegister
   end
 
   def void_last_transaction
- binding.pry
- @total - @last_price
+#binding.pry
+if @items.count == 0
+@total = 0.0
 
+ elsif @items.count > 0
+  @total -= @last_price
+end
  end
+
   #  @last_price.pop
 #  until @last_price.count == 1
 #     @last_price.shift
@@ -53,7 +58,6 @@ class CashRegister
 #    end
 #    end
 #  end
-
 
 end
  # You'll need to make an
