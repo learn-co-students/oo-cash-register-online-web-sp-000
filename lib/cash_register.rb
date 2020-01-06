@@ -11,15 +11,22 @@ class CashRegister
   def initialize(discount = 0)
     @total = 0
     @discount = discount
+    @items = []
   end
 
   # accepts a title and a price and increases the total
   # also accepts an optional quantity - ("book", 5.00, 3)
   # doesn't forget about the previous total
+  #   it "doesn't forget about the previous total" do
+      # cash_register.add_item("Lucky Charms", 4.5)
+      # expect(cash_register.total).to eq(4.5)
+      # cash_register.add_item("Ritz Crackers", 5.0)
+      # expect(cash_register.total).to eq(9.5)
+      # cash_register.add_item("Justin's Peanut Butter Cups", 2.50, 2)
+      # expect(cash_register.total).to eq(14.5)
   def add_item(title, price, quantity = 1)
-    cart = []
-    cart << self.total = price * quantity
-
+    @items << self.total = price * quantity
+    @items
   end
 
 end
