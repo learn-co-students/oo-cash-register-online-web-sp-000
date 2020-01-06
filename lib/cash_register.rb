@@ -13,5 +13,13 @@ class CashRegister
     @discount = discount
   end
 
+  # accepts a title and a price and increases the total
+  # also accepts an optional quantity - ("book", 5.00, 3)
+  # doesn't forget about the previous total
+  def add_item(title, price, quantity = 1)
+    cart = []
+    cart << self.total = price * quantity
+
+  end
 
 end
