@@ -1,16 +1,21 @@
 #WDGTR
 require 'pry'
 class CashRegister
-  attr_accessor :total, :discount, :price
+  attr_accessor :total, :discount, :price, :items, :last_transaction
 
   def initialize(discount = 0)
     @total = 0
-    @discount = 20
+    @discount = discount
+    @items = []
   end
 
   def add_item(item, price, quantity = 1)
     @price = price
     @total += @price * quantity
+    quantity.times do
+      @items << item
+    end
+    @last_transaction = quantity * price
   end
 
   def apply_discount
@@ -20,8 +25,12 @@ class CashRegister
       @total = new_total.to_i
       "After the discount, the total comes to $#{@total}."
     else
-      "There is no discount to apply"
+      "There is no discount to apply."
     end
+  end
+
+  def void_last_transaction
+    @total = @total - @last_transaction
   end
 
 end
