@@ -2,7 +2,7 @@ require 'pry'
 
 class CashRegister
 
-    attr_accessor :total, :discount
+    attr_accessor :total, :discount, :last_transaction
 
     def initialize(discount = 0)
         @total = 0
@@ -21,6 +21,7 @@ class CashRegister
         @title = title
         @price = price
         quantity.times {@items << title}
+        @last_transaction = @price * quantity
         @total = @total + (@price * quantity)
         @total
     end
@@ -47,11 +48,10 @@ class CashRegister
     end
 
     def void_last_transaction
-        @total = @total - @price
-        # To the Flatiron staff, this is hardcoded to get the final test to pass. It is Mothers' Day 2020 and I figured there wouldn't be any staff to ask. So I just did this.
-        if @total == 1.76
-            @total = 0.0
-        end
+        @total = @total - @last_transaction
+        # if @total == 1.76
+        #     @total = 0.0
+        # end
         # binding.pry
     end
 # binding.pry
