@@ -47,3 +47,10 @@ end
 
 
 end
+
+
+new_register = CashRegister.new(40)
+
+new_register.add_item("Tooth Paste", 3, quantity = 2)
+
+puts new_register.apply_discount
