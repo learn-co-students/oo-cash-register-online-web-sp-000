@@ -21,9 +21,8 @@ class CashRegister
       return "After the discount, the total comes to $#{self.total}."
     else
       return "There is no discount to apply."
-
     end
-
+    binding.pry
   end
 
   def items
