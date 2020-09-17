@@ -3,7 +3,7 @@ describe 'CashRegister' do
   let(:cash_register_with_discount) { CashRegister.new(20) }
 
   describe '::new' do
-    it 'sets an instance variable @total on initialization to zero' do
+    it 'sets an instance variable for @total on initialization to zero' do
       expect(cash_register.instance_variable_get(:@total)).to eq(0)
     end
 
@@ -74,18 +74,11 @@ describe 'CashRegister' do
     end
   end
 
-  describe '#void_last_transaction' do
-    it 'subtracts the last item from the total' do
-      cash_register.add_item("apple", 0.99)
-      cash_register.add_item("tomato", 1.76)
-      cash_register.void_last_transaction
-      expect(cash_register.total).to eq(0.99)
-    end
-
-    it 'returns the total to 0.0 if all items have been removed' do
-      cash_register.add_item("tomato", 1.76, 2)
-      expect{cash_register.void_last_transaction}.to change{cash_register.total}.from(3.52).to(0.0)
-    end
-  end
+  # BONUS: uncomment out test to work on this part
+  # describe '#void_last_transaction' do
+  #   it 'subtracts the last transaction from the total' do
+  #     cash_register.add_item("tomato", 1.76)
+  #     expect{cash_register.void_last_transaction}.to change{cash_register.total}.by(-1.76)
+  #   end
+  # end
 end
-
