@@ -19,7 +19,6 @@ class CashRegister
   
   def add_item(title, price, quantity = 1)
     last_item = {:title => title, :priced => price, :quantity => quantity}
-    
     @total += last_item[:priced] * quantity
     @items << last_item
   end
@@ -45,6 +44,5 @@ class CashRegister
     @total = @total - (@items.last[:priced] * @items.last[:quantity])
     @items.pop
   end
-  
 end
     
