@@ -28,13 +28,11 @@ class CashRegister
     self.total = (self.total - ((@discount/100.0) * self.total))
     if @discount == 0 
       return "There is no discount to apply."
-    else
-      if self.total % 1 == 0
-        return "After the discount, the total comes to $#{self.total.floor}."
-      else
-        return "After the discount, the total comes to $#{self.total}."
-      end
     end
+    if self.total % 1 == 0
+      return "After the discount, the total comes to $#{self.total.floor}."
+    end
+    return "After the discount, the total comes to $#{self.total}."
   end
 
 
