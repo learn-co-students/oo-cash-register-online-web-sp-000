@@ -1,6 +1,6 @@
 class CashRegister
 
-  attr_accessor :cash_register, :cash_register_with_discount, :discount, :items, :total
+  attr_accessor :discount, :items, :total
   
   @@LIST = []
 
@@ -8,14 +8,6 @@ class CashRegister
     @total = 0
     @discount = discount
     @items = []
-  end
-
-  def self.total
-    @total
-  end
-  
-  def self.items
-    @items
   end
   
   def add_item(item, price, quantity = 1)
