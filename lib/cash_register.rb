@@ -1,3 +1,5 @@
+require 'pry'
+
 class CashRegister 
   attr_accessor :total, :discount, :items, :last_transaction
  
@@ -8,15 +10,23 @@ class CashRegister
   end 
   
   def add_item(item, price, item_quantity = 1)
-    @total += price * item_quantity  
+    @total += price * item_quantity 
     item_quantity.times {@items << item}
     @last_transaction = price * item_quantity
+  
   end 
   
   def apply_discount
     if @discount != 0 
-      @total -= (@total * @discount / 100).to_i
-      "After the discount, the total comes to $#{@total}."
+      @total -= @total * @discount / 100
+      # to apply a discount to floats, need to round to two decimal places.
+      # Otherwise, potentially, a number with about 10 decimal places will get
+      # puts'ed out.
+      # "After the discount, the total comes to $15.350000000000001."
+      # vs. 
+      # "After the discount, the total comes to $15.35"
+      "After the discount, the total comes to $#{@total.round(2)}." 
+     
     else 
       "There is no discount to apply."
     end
